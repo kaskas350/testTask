@@ -14,10 +14,6 @@ $(document).ready(function () {
         var dropDown = $(".dropdown");
         var wrapperDropdown = $('.wrapper-dropdown');
         var dropDownA = $('.dropdown a');
-        var defaultCategory = $('.dropdown a[data-value="B"]');
-
-        wrapperDropdown.html(defaultCategory.html());
-        wrapperDropdown.attr('data-value', defaultCategory.attr('data-value'));
 
         wrapperDropdown.on('click', function (event) {
             event.stopPropagation();
@@ -43,24 +39,31 @@ $(document).ready(function () {
             evt.preventDefault();
             var name = $('input[type="text"]').val();
             var category = wrapperDropdown.attr('data-value');
-            if (name.length >= 2 && category !== null) {
-                var data = {
-                    "name": name,
-                    "category": category
-                }
-                $.post('/handler.php', data, function (data) {
-                    if (data === "success") {
-                        alert("Данные успешно добавлены");
-                        returnVisibleBackground();
-                    } else if (data === "error") {
-                        alert("Что-то пошло не так"); // можно сделать вывод ошибки для каждого конкретного случая
-                    }
-                });
-            } else if (name.length < 2) {
+
+            if (name.length < 2) {
                 alert("Имя должно содержать 2 или более символов");
+                return false;
             }
+
+            if (category === undefined) {
+                alert("Выберите категорию");
+                return false;
+            }
+
+            var data = {
+                "name": name,
+                "category": category
+            }
+            $.post('/handler.php', data, function (data) {
+                if (data === "success") {
+                    alert("Данные успешно добавлены");
+                    returnVisibleBackground();
+                } else if (data === "error") {
+                    alert("Что-то пошло не так"); // можно сделать вывод ошибки для каждого конкретного случая
+                }
+            });
         });
-    }, 5000);
+    }, 1);
 });
 
 
