@@ -1,6 +1,6 @@
 <?php
 
-if (!isset($_POST["name"]) && !isset($_POST["category"])) {
+if (!isset($_POST["name"]) || !isset($_POST["category"])) {
     echo "error";
     die;
 }
@@ -19,7 +19,7 @@ if (!in_array($_POST["category"], $arCategory)) {
     die;
 }
 
-if (empty($_POST["name"]) && count($_POST["name"]) < 2) {
+if (empty($_POST["name"]) || count($_POST["name"]) < 2) {
     echo "error";
     die;
 }
