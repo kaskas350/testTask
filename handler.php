@@ -5,7 +5,6 @@ if (!isset($_POST["name"]) || !isset($_POST["category"])) {
     die;
 }
 
-
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=testTask", 'root', 'root');
 } catch (PDOException $e) {
@@ -38,17 +37,6 @@ if ($count) {
     echo "error";
 }
 die;
-
-
-
-/*
- * CREATE TABLE `client_record` (
-    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
-    `category` ENUM('A','B','C'),
-    `username` VARCHAR(50),
-    `datecreate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
- * */
 
 
 
