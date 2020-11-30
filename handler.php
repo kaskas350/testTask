@@ -5,8 +5,9 @@ if (!isset($_POST["name"]) || !isset($_POST["category"])) {
     die;
 }
 
+
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=testtask", 'root', 'root');
+    $pdo = new PDO("mysql:host=localhost;dbname=testTask", 'root', 'root');
 } catch (PDOException $e) {
     echo "error";
     die;
@@ -19,7 +20,7 @@ if (!in_array($_POST["category"], $arCategory)) {
     die;
 }
 
-if (empty($_POST["name"]) || count($_POST["name"]) < 2) {
+if (empty($_POST["name"]) || strlen($_POST["name"]) < 2) {
     echo "error";
     die;
 }
@@ -40,7 +41,14 @@ die;
 
 
 
-
+/*
+ * CREATE TABLE `client_record` (
+    `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE,
+    `category` ENUM('A','B','C'),
+    `username` VARCHAR(50),
+    `datecreate` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+ * */
 
 
 
